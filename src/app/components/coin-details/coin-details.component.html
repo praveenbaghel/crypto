@@ -1,0 +1,31 @@
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-3 details">
+      <div class="card-body">
+        <img [src]="coinData?.image?.large" class="img" alt="">
+        <h3 class="coin-name">{{coinData?.name}}</h3>
+        <h2 class="description" [innerHtml] = "coinData?.description?.en.split('. ')[0]"></h2>
+        <div class="more-details">
+          <span class="title">Rank:</span><span class="values">{{coinData?.market_cap_rank}}</span><br>
+          <span class="title">Current price:</span><span class="values">{{coinData?.market_data.current_price.inr | currency : currency}}</span><br>
+          <span class="title">Market Cap:</span><span class="values">{{coinData?.market_data.market_cap.inr | currency : currency}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- chart -->
+
+    <div class="col-md-8">
+      <canvas class="graph" baseChart [data] = 'lineChartData' [options] = 'lineChartOptions' [type] = 'lineChartType'>
+      </canvas>
+      <div class="graph-btn">
+        <div (click)="getGraphData(1)" class="btn btn-custom">24 Hour</div>
+        <div (click)="getGraphData(30)" class="btn btn-custom">1 Month</div>
+        <div (click)="getGraphData(90)" class="btn btn-custom">3 Months</div>
+        <div (click)="getGraphData(365)" class="btn btn-custom">1 Year</div>
+      </div>
+    </div>
+  </div>
+</div>
